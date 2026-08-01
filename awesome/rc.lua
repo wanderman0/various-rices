@@ -1,7 +1,8 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-
+package.path = package.path .. ";/home/mino/.luarocks/share/lua/5.3/?.lua"
+package.path = package.path .. ";/home/mino/.luarocks/share/lua/5.3/?/init.lua"
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -46,14 +47,15 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/amin/.config/awesome/themes/default/landscape-trees-mountains-clouds.lua")
+beautiful.init("/home/mino/.config/awesome/themes/default/boat-on-a-calm-lake.lua")
 -- other imports
+local weather = require("weather")
 
 
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-editor = os.getenv("EDITOR") or "nvim"
+editor = os.getenv("EDITOR") or "micro"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -219,12 +221,16 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
             awful.widget.watch("uname -r"),
+            weather,
             mytextclock,
             s.mylayoutbox,
         },
     }
+
 end)
 -- }}}
+
+
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
@@ -289,10 +295,16 @@ globalkeys = gears.table.join(
               {description = "open thunderbird", group = "application"}),
      awful.key({ modkey, "Control"}, "p", function () awful.spawn("pcmanfm") end,
               {description = "open pcmanfm", group = "application"}),
-    awful.key({ modkey,  "Control"}, "v",  function () awful.spawn("xfce4-screenshooter") end,
+    awful.key({ modkey,  "Control"}, "v",  function () awful.spawn("spectacle") end,
               {description = "take screenshot", group = "application"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
+    awful.key({modkey, "Shift"}, "p", function() awful.spawn("systemctl poweroff") end,
+          {description = "shutdown", group = "power"}),
+    awful.key({modkey, "Shift"}, "r", function() awful.spawn("systemctl reboot") end,
+          {description = "reboot", group = "power"}),
+    awful.key({modkey, "Shift"}, "s", function() awful.spawn("systemctl suspend") end,
+              {description = "suspend", group = "power"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
@@ -513,7 +525,7 @@ awful.rules.rules = {
        properties = { screen = 1, tag = " 🤖 " } },
      { rule = { class = "Alacritty" },
        properties = { screen = 1, tag = " 🤖 " } }, 
-     { rule = { class = "Firefox" },
+     { rule = { class = "firefox" },
        properties = { screen = 1, tag = " 🧭 " } },
      { rule = { class = "Marble" },
        properties = { screen = 1, tag = " 🧭 " } },
@@ -529,7 +541,7 @@ awful.rules.rules = {
        properties = { screen = 1, tag = " 🧭 " } },
      { rule = { class = "MEGAsync" },
        properties = { screen = 1, tag = " 🧭 " } },  
-     { rule = { class = "lite-xl" },
+     { rule = { class = "Sublime_text" },
        properties = { screen = 1, tag = " 🧑🏻‍💻 " } },
       { rule = { class = "Geany" },
        properties = { screen = 1, tag = " 🧑🏻‍💻 " } }, 
@@ -539,7 +551,11 @@ awful.rules.rules = {
        properties = { screen = 1, tag = " 🎨 " } },
      { rule = { class = "Inkscape" },
        properties = { screen = 1, tag = " 🎨 " } },
+     { rule = { class = "pigment" },
+       properties = { screen = 1, tag = " 🎨 " } },
      { rule = { class = "Pcmanfm" },
+       properties = { screen = 1, tag = " 🗃️ " } },
+     { rule = { class = "dolphin" },
        properties = { screen = 1, tag = " 🗃️ " } },
      { rule = { class = "Telegram" },
        properties = { screen = 1, tag = " 📧 " } },
@@ -554,9 +570,17 @@ awful.rules.rules = {
      { rule = { class = "discord" },
        properties = { screen = 1, tag = " 📧 " } },
      { rule = { class = "Zulip" },
+       properties = { screen = 1, tag = " 📧 " } },
+     { rule = { class = "Zoho Mail - Desktop" },
+       properties = { screen = 1, tag = " 📧 " } },
+     { rule = { class = "Proton Mail" },
        properties = { screen = 1, tag = " 📧 " } },  
      { rule = { class = "Virt-manager" },
        properties = { screen = 1, tag = " 🖥️ " } },
+     { rule = { class = "komikku" },
+       properties = { screen = 1, tag = " 🖥️ " } },
+     { rule = { class = "io.gitlab.elescoute.password" },
+       properties = { screen = 1, tag = " 🖥️ " } }, 
      { rule = { class = "Engrampa" },
        properties = { screen = 1, tag = " 🗃️ " } },
      { rule = { class = "ark" },
@@ -565,11 +589,17 @@ awful.rules.rules = {
        properties = { screen = 1, tag = " 🗃️ " } },
      { rule = { class = "vlc" },
        properties = { screen = 1, tag = " 🎞️ " } },  
-     { rule = { class = "Pcsx2" },
+     { rule = { class = "kbreakout" },
+       properties = { screen = 1, tag = " 🕹️ " } },
+     { rule = { class = "pcsx2-qt" },
        properties = { screen = 1, tag = " 🕹️ " } },
      { rule = { class = "PPSSPP" },
        properties = { screen = 1, tag = " 🕹️ " } },  
      { rule = { class = "retroarch" },
+       properties = { screen = 1, tag = " 🕹️ " } },
+     { rule = { class = "steam" },
+       properties = { screen = 1, tag = " 🕹️ " } },
+     { rule = { class = "luanti.bin" },
        properties = { screen = 1, tag = " 🕹️ " } },
      { rule = { class = "opensurge" },
        properties = { screen = 1, tag = " 🕹️ " } },
@@ -645,6 +675,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.util.spawn ("flameshot")
 awful.util.spawn ("kdeconnect-indicator")
 awful.util.spawn ("nm-applet")
+awful.spawn("blueman-applet")
+awful.spawn("pasystray")
 awful.spawn.with_shell ("setxkbmap fr,ara")
 
 local gshape = require("gears.shape")
