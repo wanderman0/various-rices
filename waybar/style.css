@@ -1,0 +1,202 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* Fond général de la barre */
+#workspaces,
+#clock,
+#cpu,
+#memory,
+#network,
+#language,
+#battery,
+#pulseaudio,
+#temperature,
+#disk,
+#custom-kernel,
+#custom-cava,
+#idle_inhibitor {
+    background-color: #262439;
+    color: #39effc;
+    border-radius: 12px;
+    padding: 0 12px;
+    margin: 2px 3px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Effet de survol commun à tous les modules */
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#language:hover,
+#battery:hover,
+#pulseaudio:hover,
+#temperature:hover,
+#disk:hover,
+#custom-kernel:hover,
+#idle_inhibitor:hover {
+    background-color: #597492;
+    color: #262439;
+}
+
+/* Tray : pas de fond, juste un peu d'air autour des icônes */
+#tray {
+    background-color: #262439;
+    border-radius: 12px;
+    padding: 0 10px;
+    margin: 2px 3px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #f29341;
+    border-radius: 8px;
+}
+
+/* Espaces de travail Hyprland */
+#workspaces button {
+    color: #597492;
+    background-color: #262439;
+    padding: 0 6px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    color: #39effc;
+    background-color: #f29341;
+    padding: 0 10px;
+}
+
+#workspaces button:hover {
+    background-color: #597492;
+    color: #262439;
+}
+
+/* Horloge centrale */
+#clock {
+    background-color: #262439;
+    color: #39effc;
+    font-weight: bold;
+    padding: 0 16px;
+}
+
+#clock:hover {
+    background-color: #597492;
+    color: #262439;
+}
+
+/* CPU */
+#cpu {
+    color: #39effc;
+}
+
+/* RAM */
+#memory {
+    color: #39effc;
+}
+
+/* Réseau */
+#network {
+    color: #39effc;
+}
+
+#network.disconnected {
+    color: #f29341;
+}
+
+tooltip {
+    background-color: #262439;
+    border: 1px solid #597492;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: #39effc;
+}
+
+/* Disposition clavier */
+#language {
+    color: #39effc;
+}
+
+/* Batterie */
+#battery {
+    color: #39effc;
+}
+
+#battery.charging {
+    color: #597492;
+}
+
+#battery.warning:not(.charging) {
+    color: #f29341;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f29341;
+    color: #39effc;
+    animation: blink 1.5s linear infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #262439;
+    }
+}
+
+/* Volume */
+#pulseaudio {
+    color: #39effc;
+}
+
+#pulseaudio.muted {
+    color: #f29341;
+}
+
+/* Température CPU */
+#temperature {
+    color: #39effc;
+}
+
+#temperature.critical {
+    background-color: #f29341;
+    color: #39effc;
+}
+
+/* Disque */
+#disk {
+    color: #39effc;
+}
+
+/* Noyau (custom/kernel) */
+#custom-kernel {
+    color: #39effc;
+}
+
+/* Visualiseur audio (cava) */
+#custom-cava {
+    color: #f29341;
+    padding: 0 10px;
+}
+
+/* Inhibiteur de veille */
+#idle_inhibitor {
+    color: #39effc;
+}
+
+#idle_inhibitor.activated {
+    color: #f29341;
+}
