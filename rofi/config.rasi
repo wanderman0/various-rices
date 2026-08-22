@@ -1,3 +1,9 @@
+* {
+    bg-dark:    #262439;
+    bg-border:  #39effc;
+    accent:     #39effc;
+    accent2:    #597492;
+}
 
 element {
     padding:     1px ;
@@ -6,6 +12,21 @@ element {
     spacing:     5px ;
     border:      0;
     children:    [ "element-text","element-icon" ];
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:        @accent2;
+}
+
+element selected.normal {
+    background-color: @accent;
+    text-color:        @bg-dark;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:        @accent2;
 }
 
 element-text {
@@ -25,8 +46,8 @@ element-icon {
 
 window {
     padding:          5;
-    background-color: #1B1E2D;
-    border-color:     #88172B;
+    background-color: @bg-dark;
+    border-color:     @bg-border;
     border:           5;
 }
 
@@ -36,17 +57,17 @@ mainbox {
 }
 message {
     padding:      1px ;
-    border-color: var(separatorcolor);
+    border-color: @bg-border;
     border:       2px dash 0px 0px ;
 }
 textbox {
-    text-color: white;
+    text-color: @accent2;
 }
 
 listview {
     padding:      2px 0px 0px ;
     scrollbar:    true;
-    border-color: var(separatorcolor);
+    border-color: @bg-border;
     spacing:      2px ;
     fixed-height: 0;
     border:       2px dash 0px 0px ;
@@ -56,54 +77,54 @@ scrollbar {
     padding:      0;
     handle-width: 8px ;
     border:       0;
-    handle-color: #FCCEC1;
+    handle-color: @accent;
 }
 sidebar {
-    border-color: var(separatorcolor);
+    border-color: @bg-border;
     border:       2px dash 0px 0px ;
 }
 button {
     cursor:     pointer;
     spacing:    0;
-    text-color: white;
+    text-color: @accent2;
 }
 button selected {
-    background-color: #FCCEC1;
-    text-color:       black;
+    background-color: @accent;
+    text-color:       @bg-dark;
 }
 num-filtered-rows {
     expand:     false;
-    text-color: #FCCEC1;
+    text-color: @accent2;
 }
 num-rows {
     expand:     false;
-    text-color: #FCCEC1;
+    text-color: @accent2;
 }
 textbox-num-sep {
     expand:     false;
     str:        "|";
-    text-color: #FCCEC1;
+    text-color: @accent2;
 }
 inputbar {
     padding:    1px ;
     spacing:    0px ;
-    text-color: #FCCEC1;
+    text-color: @accent2;
     children:   [ "prompt","textbox-prompt-colon","entry","num-filtered-rows","textbox-num-sep","num-rows","case-indicator" ];
 }
 case-indicator {
     spacing:    0;
-    text-color: var(normal-foreground);
+    text-color: @accent2;
 }
 entry {
-    text-color:        white;
+    text-color:        @accent2;
     cursor:            text;
     spacing:           0;
-    placeholder-color: #FCCEC1;
+    placeholder-color: @bg-border;
     placeholder:       "write here";
 }
 prompt {
     spacing:    0;
-    text-color: #FCCEC1;
+    text-color: @accent2;
 }
 textbox-prompt-colon {
     margin:     0px 0.3000em 0.0000em 0.0000em ;
@@ -111,4 +132,3 @@ textbox-prompt-colon {
     str:        ":";
     text-color: inherit;
 }
-
