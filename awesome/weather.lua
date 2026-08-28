@@ -4,7 +4,7 @@ local awful = require("awful")
 local gears = require("gears")
 local json = require("dkjson")
 
-local api_key = "c8a09a2199c726a68fe74c7fba6ed92a"
+local api_key = "YOUR_API_KEY"
 local lat = "36.54178"
 local lon = "3.081"
 local units = "metric"
